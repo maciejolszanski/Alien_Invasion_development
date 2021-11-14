@@ -38,7 +38,7 @@ class AlienInvasion():
 
         self._create_alien_fleet()
 
-        self.play_button = Button(self, "GRA")
+        self.play_button = Button(self, "PLAY")
         self.sb = Scoreboard(self)
 
     def run_game(self):
@@ -106,6 +106,10 @@ class AlienInvasion():
             self._create_alien_fleet()
             self.ship.center_ship()
 
+            # display the game and freeze for 1 second
+            self._update_screen()
+            sleep(1)
+
             # hiding mouse coursor during gameplay
             pygame.mouse.set_visible(False)
 
@@ -128,9 +132,10 @@ class AlienInvasion():
 
         #calculate the number of rows
         ship_height = self.ship.rect.height
-        available_space_y = (
-            self.settings.screen_height - (3 * alien_height) - ship_height)
-        number_rows = available_space_y // (2 * alien_height)
+        available_space_y = (self.settings.screen_height - 
+            (3 * alien_height) - 1.5 * ship_height)
+        # using int() to convert for example 4.0 to 4
+        number_rows = int(available_space_y // (2 * alien_height))
 
         # Creating the alien fleet
         for row_number in range(number_rows):
@@ -143,7 +148,7 @@ class AlienInvasion():
         alien_width, alien_height = alien.rect.size
         alien.x = alien_width + 2 * alien_width * alien_number
         alien.rect.x = alien.x
-        alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
+        alien.rect.y = 2 * alien.rect.height + 2 * alien.rect.height * row_number
         self.aliens.add(alien)
 
     def _check_fleet_edges(self):
@@ -243,19 +248,20 @@ class AlienInvasion():
         '''updating images on the screen and changing screens'''
         # refreshing the screen in each iteration of the main loop
         self.screen.fill(self.settings.bg_color)
-        self.ship.blitme()
-
-        for bullet in self.bullets.sprites():
-            bullet.draw_bullet()
-
-        self.aliens.draw(self.screen)
-
-        self.sb.show_score()
         
-        # display button only when the game is inactive
+        # when game is inactive - display button
         if not self.stats.game_active:
             self.play_button.draw_button()
-            
+        #otherwise display the game
+        else:
+            self.ship.blitme()
+            for bullet in self.bullets.sprites():
+                bullet.draw_bullet()
+
+            self.aliens.draw(self.screen)
+
+            self.sb.show_score()
+                    
         # display last modification of the screen
         pygame.display.flip()
 
