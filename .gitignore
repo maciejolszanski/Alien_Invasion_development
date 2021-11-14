@@ -1,2 +1,5 @@
 # All of the pycache files
 /__pycache__
+
+# All of the user data eg. high score
+/data

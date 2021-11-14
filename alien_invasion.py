@@ -185,6 +185,11 @@ class AlienInvasion():
         # Player does not have another "life"
         else:
             self.stats.game_active = False
+            # If the high score was beaten, saving the new one to file
+            # and reset the saving highscore flag
+            if self.stats.save_new_high_score_flag:
+                self.sb.save_new_high_score_to_file()
+                self.stats.save_new_high_score_flag = False
             pygame.mouse.set_visible(True)
 
     def _check_aliens_bottom(self):

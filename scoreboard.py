@@ -1,5 +1,8 @@
 import pygame.font
+import json
+
 from pygame.sprite import Group
+from os import path, mkdir
 
 from ship import Ship
 
@@ -73,6 +76,23 @@ class Scoreboard():
         if self.stats.score > self.stats.high_score:
             self.stats.high_score = self.stats.score
             self.prep_high_score()
+            # sets the flag to save new high score to .json file 
+            # at the end of the game
+            self.stats.save_new_high_score_flag = True
+
+    def save_new_high_score_to_file(self):
+        '''Writing the new high score to .json'''
+        # getting the directory name from the path
+        path_list = self.stats.high_score_path.split('/')
+        directory_name = path_list[0]
+
+        # checking if such directory exists and creating it if it does not
+        if not path.exists(directory_name):
+            mkdir(directory_name)
+        # writing high score to file
+        with open(self.stats.high_score_path, 'w') as f:
+                json.dump(self.stats.high_score, f)
+
 
     def show_score(self):
         '''Display the score on the screen'''
