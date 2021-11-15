@@ -1,22 +1,27 @@
 import pygame
 
-class Button():
+from pygame.sprite import Sprite
+
+
+class Button(Sprite):
     '''Defining a button'''
 
-    def __init__(self, ai_game, msg):
+    def __init__(self, ai_game, msg, y_pos=400):
         '''initializing attributes of the button'''
+        super().__init__()
         self.screen = ai_game.screen
         self.screen_rect = self.screen.get_rect()
 
         # defining the button size and other properties
-        self.width, self.height = 200, 50
+        self.width, self.height = 400, 90
         self.button_color = (0, 255, 0)
         self.text_color = (255,255,255)
-        self.font = pygame.font.SysFont(None, 48)
+        self.font = pygame.font.SysFont(None, 72)
 
         # creating buttons rect and centering it
         self.rect = pygame.Rect(0, 0, self.width, self.height)
-        self.rect.center = self.screen_rect.center
+        self.rect.centerx = self.screen_rect.centerx
+        self.rect.centery = y_pos
 
         # preparing msg for the button
         self._prep_msg(msg)

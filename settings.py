@@ -20,6 +20,8 @@ class Settings():
         # Alien settings
         self.fleet_drop_speed = 10
 
+        # Content of the menu settings
+        self.buttonlist = ["PLAY", "HOW TO PLAY", "SETTINGS", "INFO"]
 
         # Easy change of the game speed
         self.speedup_scale = 1.1

@@ -10,6 +10,7 @@ from alien import Alien
 from game_stats import GameStats
 from button import Button
 from scoreboard import Scoreboard
+from menu import Menu
 
 
 class AlienInvasion():
@@ -39,6 +40,9 @@ class AlienInvasion():
         self._create_alien_fleet()
 
         self.play_button = Button(self, "PLAY")
+        self.menu = Menu(self)
+        
+
         self.sb = Scoreboard(self)
 
     def run_game(self):
@@ -256,7 +260,8 @@ class AlienInvasion():
         
         # when game is inactive - display button
         if not self.stats.game_active:
-            self.play_button.draw_button()
+            #self.play_button.draw_button()
+            self.menu.draw_menu()
         #otherwise display the game
         else:
             self.ship.blitme()
