@@ -11,6 +11,7 @@ class Button(Sprite):
         super().__init__()
         self.screen = ai_game.screen
         self.screen_rect = self.screen.get_rect()
+        self.msg = msg
 
         # defining the button size and other properties
         self.width, self.height = 400, 90
@@ -24,12 +25,12 @@ class Button(Sprite):
         self.rect.centery = y_pos
 
         # preparing msg for the button
-        self._prep_msg(msg)
+        self._prep_msg()
 
-    def _prep_msg(self, msg):
+    def _prep_msg(self):
         '''Placing the message on the screen, and cetering it on the button'''
         self.msg_image = self.font.render(
-            msg, True, self.text_color, self.button_color)
+            self.msg, True, self.text_color, self.button_color)
         self.msg_image_rect = self.msg_image.get_rect()
         self.msg_image_rect.center = self.rect.center
 

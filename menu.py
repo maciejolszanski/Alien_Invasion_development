@@ -15,6 +15,8 @@ class Menu():
         self.buttons = pygame.sprite.Group()
         self.buttonlist = ai_game.settings.buttonlist
 
+        self.clicked_but = None
+
     def draw_menu(self):
         '''drawing buttons of the menu'''
         
@@ -41,3 +43,18 @@ class Menu():
             created_button.draw_button()
 
             iterations += 1
+
+    def is_any_button_clicked(self, mouse_pos):
+        '''checking if any button is clicked'''
+        for button in self.buttons.sprites():
+            button_clicked = button.rect.collidepoint(mouse_pos)
+
+            #check what is the message of the clicked button
+            if button_clicked:
+                self.clicked_but = button.msg
+                break
+            else:
+                self.clicked_but = None
+            
+        return self.clicked_but
+                
