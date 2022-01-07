@@ -42,7 +42,6 @@ class AlienInvasion():
         self.play_button = Button(self, "PLAY")
         self.menu = Menu(self)
         
-
         self.sb = Scoreboard(self)
         self.menu_button = None
 
