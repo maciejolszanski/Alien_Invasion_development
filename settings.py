@@ -1,5 +1,5 @@
 class Settings():
-    '''Storing every setiing of the game'''
+    '''Storing every setting of the game'''
 
     def __init__(self):
 
